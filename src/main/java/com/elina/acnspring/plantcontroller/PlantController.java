@@ -28,6 +28,9 @@ public class PlantController {
     @GetMapping("plantNursery")
     public String getPlantNursery(ModelMap model) {
         model.addAttribute("plantNursery", plantService.getPlantNursery());
+        model.addAttribute("flowers", plantService.getPlants(PlantType.FLOWER));
+        model.addAttribute("herbs", plantService.getPlants(PlantType.HERB));
+        model.addAttribute("vegetables", plantService.getPlants(PlantType.VEGETABLE));
 
         //Plant veidi
         List<String> enumNames = Stream.of(PlantType.values())
@@ -89,14 +92,8 @@ public class PlantController {
     @RequestMapping(value = "plantNursery/plant/edit", method = RequestMethod.POST)
     public String changeAmount(
             @RequestParam("id") Long id,
-            @RequestParam("newTitle") String title,
-            @RequestParam("newAmount") int amount,
-            @RequestParam("newType") String type,
-            @RequestParam(value = "newDescription", required = false) String description) {
-        
-    	PlantType typeEnum = Enum.valueOf (PlantType.class, type);
-    	
-    	
+            @RequestParam("newAmount") int amount) {
+          	
     	plantService.changeAmount(id, amount);
     	
         return "redirect:/plantNursery";

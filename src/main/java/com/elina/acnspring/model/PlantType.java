@@ -6,6 +6,6 @@ package com.elina.acnspring.model;
 public enum PlantType {
 
     FLOWER,
-    VEGERTABLE,
+    VEGETABLE,
     HERB
 }

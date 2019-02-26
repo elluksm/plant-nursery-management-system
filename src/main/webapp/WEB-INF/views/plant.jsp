@@ -8,22 +8,20 @@
 <title>PlantNursery</title>
 </head>
 <body>
-    <h3>Edit plant ammount</h3>
+    <h2>Edit available amount</h2>
     
     <c:if test="${plant != null}">
     
-    
-    
                 <form action="${pageContext.servletContext.contextPath}/plantNursery/plant/edit" method="post">
                 <input type="hidden" name="id" value="${plant.id}"/>
-                Title: <input type="text" name="newTitle" value=${plant.title} /> <br>
-                Amount: <input type="text" name="newAmount" value=${plant.amount} /> <br>
-                Type: <select name="newType"><br>
-	                <c:forEach var="pType" items="${plantTypes}"><option ${pType == plant.type?"selected":""} value="${pType}">${pType}</option></c:forEach>
-                </select>
-                Description: <input type="text" name="newDescription"  value=${plant.description} /> <br>                
+                <p>Title: ${plant.title}</p>
+                <p>Type: ${plant.type}</p>
+                <p>Description: ${plant.description}</p>
+                Amount: <input type="text" name="newAmount" value=${plant.amount} class="form-control"/> <br>
+                <br>
                 <input type="submit" value="Submit changes" />
             </form>
+            <br>
             <a href="/plantNursery">Cancel</a>
     
     
@@ -31,14 +29,7 @@
     <c:if test="${plant == null}">
     	Error: Please go back and choose plant to edit!
     </c:if> 
-    
-    
-    <c:if test="${empty param.personName && not empty param.status}">
-        Show books with status = <b>${param.status}</b><br>
-    </c:if>
-    <c:forEach var="book" items="${books}">
-        <b>Book:</b> ${book} <br>
-    </c:forEach>
+
 
 </body>
 </html>
