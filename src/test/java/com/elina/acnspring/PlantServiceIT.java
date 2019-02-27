@@ -65,34 +65,30 @@ public class PlantServiceIT {
     	assertThat(plantService.getPlants(null), is(expectedAllPlants));
     	assertThat(plantService.getPlants(PlantType.VEGETABLE), is(expectedVegetables));
     	assertThat(plantService.getPlants(PlantType.FLOWER), is(expectedFlowers));
-    	assertThat(plantService.getPlants(PlantType.HERB), is(expectedHerbs));
+    	assertEquals(plantService.getPlants(PlantType.HERB), expectedHerbs);
+    	
+    	List<Plant> actualHerbs = plantService.getPlants(PlantType.HERB);
+    	assertEquals(expectedHerbs, actualHerbs);
     	
     }
 
 
     @Test
-    public void BTestAddPlant() {
+    public void BTestAddAndRemovePlant() {
         assertThat(plantService.getPlants(null), is(expectedAllPlants));
         plantService.addPlant("newPetunia", 2, PlantType.FLOWER, "white");
 
         List<Plant> expectedPlantsAfterAdd = new ArrayList<>(expectedAllPlants);
-        expectedPlantsAfterAdd.add(new Plant("newPetunia", 2, PlantType.FLOWER, "white"));
+        expectedPlantsAfterAdd.add(0, new Plant(1l, "newPetunia", 2, PlantType.FLOWER, "white"));
         assertThat(plantService.getPlants(null), is(expectedPlantsAfterAdd));
-
+        
+        plantService.removePlant(1l);
+        assertThat(plantService.getPlants(null), is(expectedAllPlants));
     }
     
-    @Test
-    public void CTestRemovePlant() {
-    	List<Plant> expectedPlantsAfterDelete = new ArrayList<>(expectedAllPlants);
-    	expectedPlantsAfterDelete.remove(0);
-        
-        plantService.removePlant(10001l);
-        assertThat(plantService.getPlants(null), is(expectedPlantsAfterDelete));
-
-    }
 
     @Test
-    public void DTestChangeAmount(){
+    public void CTestChangeAmount(){
     	List<Plant> expectedPlantsAfterChangeAmount = new ArrayList<>(expectedAllPlants);
     	expectedPlantsAfterChangeAmount.set(2, new Plant(10003l, "Petunia axillaris", 2, PlantType.FLOWER, "large white petunia"));
     	plantService.changeAmount(10003l,2);

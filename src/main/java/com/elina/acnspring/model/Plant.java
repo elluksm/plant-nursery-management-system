@@ -1,6 +1,8 @@
 
 package com.elina.acnspring.model;
 
+import java.util.Objects;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -81,4 +83,22 @@ public class Plant {
 	public String toString() {
 		return String.format("Plant [id=%s, title=%s, type=%s, ammount=%s, description=%s]", id, title, type,amount,description);
 	}
+    
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Plant plant = (Plant) o;
+		return Objects.equals(id, plant.id) &&
+				Objects.equals(title, plant.title) &&
+				Objects.equals(amount, plant.amount) &&
+				Objects.equals(type, plant.type) &&
+				Objects.equals(description, plant.description);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, title, amount, type, description );
+	}
+	
 }
