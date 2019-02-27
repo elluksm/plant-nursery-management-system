@@ -9,4 +9,3 @@ import com.elina.acnspring.model.Plant;
 public interface PlantRepository extends JpaRepository<Plant, Long> {
 
 }
-

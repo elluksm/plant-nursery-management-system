@@ -1,8 +1,5 @@
 package com.elina.acnspring.model;
 
-
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -24,7 +21,6 @@ public class PlantNursery implements PlantDao {
 
     public PlantNursery() {
         this.name = "Plant Nursery";
-//        this.plantRegistry = new PlantRegistry(plantRepository);
     }
     public PlantNursery(String name) {
         this();
@@ -62,7 +58,5 @@ public class PlantNursery implements PlantDao {
     public List<Plant> getPlantsByType(PlantType type) {
         return this.plantRegistry.getPlantsByType(type);
     }
-
-
 
 }

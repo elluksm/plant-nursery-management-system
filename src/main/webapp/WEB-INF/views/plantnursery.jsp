@@ -35,7 +35,7 @@
 								action="${pageContext.servletContext.contextPath}/plantNursery/plant/remove"
 								method="post">
 								<input type="hidden" name="id" value="${plant.id}" /> <input
-									type="submit" value="Remove" />
+									type="submit" value="Delete" />
 							</form>
 
 							<form
@@ -63,7 +63,7 @@
 								action="${pageContext.servletContext.contextPath}/plantNursery/plant/remove"
 								method="post">
 								<input type="hidden" name="id" value="${plant.id}" /> <input
-									type="submit" value="Remove" />
+									type="submit" value="Delete" />
 							</form>
 
 							<form
