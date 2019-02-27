@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+
 import com.elina.acnspring.model.Plant;
 import com.elina.acnspring.model.PlantType;
 
@@ -65,21 +66,18 @@ public class PlantServiceIT {
     	assertThat(plantService.getPlants(null), is(expectedAllPlants));
     	assertThat(plantService.getPlants(PlantType.VEGETABLE), is(expectedVegetables));
     	assertThat(plantService.getPlants(PlantType.FLOWER), is(expectedFlowers));
-    	assertEquals(plantService.getPlants(PlantType.HERB), expectedHerbs);
-    	
-    	List<Plant> actualHerbs = plantService.getPlants(PlantType.HERB);
-    	assertEquals(expectedHerbs, actualHerbs);
-    	
+    	assertThat(plantService.getPlants(PlantType.HERB), is(expectedHerbs));
     }
 
 
     @Test
     public void BTestAddAndRemovePlant() {
         assertThat(plantService.getPlants(null), is(expectedAllPlants));
+        
         plantService.addPlant("newPetunia", 2, PlantType.FLOWER, "white");
-
         List<Plant> expectedPlantsAfterAdd = new ArrayList<>(expectedAllPlants);
         expectedPlantsAfterAdd.add(0, new Plant(1l, "newPetunia", 2, PlantType.FLOWER, "white"));
+        
         assertThat(plantService.getPlants(null), is(expectedPlantsAfterAdd));
         
         plantService.removePlant(1l);
@@ -93,7 +91,10 @@ public class PlantServiceIT {
     	expectedPlantsAfterChangeAmount.set(2, new Plant(10003l, "Petunia axillaris", 2, PlantType.FLOWER, "large white petunia"));
     	plantService.changeAmount(10003l,2);
     	assertThat(plantService.getPlants(null), is(expectedPlantsAfterChangeAmount));
-
     }
 
+    @Test
+    public void CTestfindPlantById(){
+    	assertThat(plantService.findPlantById(10005l), is(new Plant(10005l, "Sunflower", 9, PlantType.FLOWER, "yellow")));
+    }
 }

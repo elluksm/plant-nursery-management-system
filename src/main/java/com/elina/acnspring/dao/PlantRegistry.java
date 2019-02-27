@@ -1,6 +1,5 @@
 package com.elina.acnspring.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,23 +23,23 @@ public class PlantRegistry {
     
     public List<Plant> getPlants() {
         return this.plantRepository.findAll();
-    };
+    }
     
     public void removePlant(Plant p){
         if (p == null) {
             return;
         }
         this.plantRepository.delete(p);
-    };
+    }
 
     public void addPlant(Plant p) {
         this.plantRepository.save(p);
-    };
+    }
 
     public void changeAmount(Plant p, int newAmount) {
     	p.setAmount(newAmount);
     	this.plantRepository.save(p);
-    };
+    }
 
     public Plant findPlantById(Long id) {
         if (id == null) {

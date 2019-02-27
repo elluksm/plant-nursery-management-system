@@ -53,7 +53,7 @@ public class PlantNursery implements PlantDao {
 
     public Plant findPlantById(Long id){
         return this.plantRegistry.findPlantById(id);
-    };
+    }
 
     public List<Plant> getPlantsByType(PlantType type) {
         return this.plantRegistry.getPlantsByType(type);

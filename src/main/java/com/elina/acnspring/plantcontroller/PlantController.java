@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,12 +20,10 @@ import com.elina.acnspring.model.Plant;
 import com.elina.acnspring.model.PlantType;
 
 @Controller
-//@RequestMapping("/plantNursery") //- Salauž apakšā esošos routingus;
 public class PlantController {
     @Autowired
     private PlantService plantService;
 
-//    @RequestMapping(value="test", method = RequestMethod.GET)
     @GetMapping("plantNursery")
     public String getPlantNursery(ModelMap model) {
         model.addAttribute("plantNursery", plantService.getPlantNursery());
@@ -49,7 +48,6 @@ public class PlantController {
         return "Hello light!";
     }
 
-//    @RequestMapping(value = "/plant", method = RequestMethod.GET)
     @GetMapping("edit-plant")
     public String getPlant(
     		@RequestParam("id") Long id, 
@@ -68,7 +66,7 @@ public class PlantController {
         return "plant";
     }
 
-    @RequestMapping(value = "plantNursery/plant/add", method = RequestMethod.POST)
+    @PostMapping("plantNursery/plant/add")
     public String addPlant(
             @RequestParam("title") String title,
             @RequestParam("amount") int amount,
@@ -80,16 +78,16 @@ public class PlantController {
     	plantService.addPlant(title, amount, typeEnum, description);
         return "redirect:/plantNursery";
     }
-
-    @RequestMapping(value = "plantNursery/plant/remove", method = RequestMethod.POST)
+    
+    @PostMapping("plantNursery/plant/remove")
     public String removePlant(
             @RequestParam("id") Long id
     ) {
         plantService.removePlant(id);
         return "redirect:/plantNursery";
     }
-
-    @RequestMapping(value = "plantNursery/plant/edit", method = RequestMethod.POST)
+    
+    @PostMapping("plantNursery/plant/edit")
     public String changeAmount(
             @RequestParam("id") Long id,
             @RequestParam("newAmount") int amount) {

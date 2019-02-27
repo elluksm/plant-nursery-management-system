@@ -64,6 +64,13 @@ public class PlantServiceTest {
         assertThat(plantService.getPlants(PlantType.FLOWER), is(flowers));
 
     }
+    
+    @Test
+    public void testFindPlantById() {
+    	Plant herbPlant = new Plant(10001l, "Cinnamon basil", 20, PlantType.HERB, "has a spicy, fragrant aroma and flavor.");
+        assertThat(plantService.findPlantById(10001l), is(herbPlant));
+
+    }
 
     @Test
     public void testAddPlant() {
